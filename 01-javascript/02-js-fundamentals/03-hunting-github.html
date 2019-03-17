@@ -1,1 +1,47 @@
-// 1 hour
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Gotta Catch'em All</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#data-button").click(function () {
+        $.get("https://api.github.com/users/albionahoti", function(res) {
+          var html_str = "";
+          html_str += "<h1>Users profile</h1>";
+          html_str += "<ul>";
+          html_str += "<li> Login: " + res.login + "</li>";
+          html_str += "<li> Id: " + res.id + "</li>";
+          html_str += "<li> Blog: " + res.blog + "</li>";
+          html_str += "</ul>";
+          $(".data").html(html_str);
+        }, "json");
+
+      })
+    })
+
+  </script>
+  <style>
+    .container {
+      width: 960px;
+      min-height: 1024px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="data">
+    </div>
+
+    <div>
+      <button id="data-button" type="submit">Data </button>
+
+    </div>
+  </div>
+</body>
+
+</html>
