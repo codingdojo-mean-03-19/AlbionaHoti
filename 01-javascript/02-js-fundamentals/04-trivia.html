@@ -1,1 +1,110 @@
-<!-- 2 hours -->
+<!-- /*
+Required: Display the questions and the possible answers.
+
+BONUS 1: Reveal the correct answer when the user clicks a button.
+
+BONUS 2: Provide feedback to the user if they chose the correct answer or not and/or keep score.
+
+BONUS 3: Organize the questions by category.
+
+BONUS 4: Organize the questions by difficulty.
+
+BONUS 5: Create the UI with the questions hidden until selected.
+*/ -->
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script type="text/javascript">
+
+
+      function showQuestion(id) {
+        document.getElementById(id).innerHTML = content
+
+        var content = (
+          <div id="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Component
+                </p>
+                <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                  <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                  <br></br>
+                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Save</a>
+                <a href="#" class="card-footer-item">Edit</a>
+                <a href="#" class="card-footer-item">Delete</a>
+              </footer>
+            </div>
+        )
+        if (e.style.display == 'block')
+          e.style.display = 'none';
+        else
+          e.style.display = 'block';
+        // document.getElementById(i).style.visibility='visible';
+      }
+
+
+    </script>
+    <style>
+      #color-card {
+        background-color: antiquewhite;
+        /* width: 220px;
+        height: 220px; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <section class="section">
+        <h1 class="title">
+          Hello World
+        </h1>
+        <p class="subtitle">
+          My first website with <strong>Bulma</strong>!
+        </p>
+
+
+        <div class="columns is-mobile">
+          <div
+            class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+            <div id="color-card" onclick="showQuestion('color-card');">
+              <header class="card-header"></header>
+              <div class="card-content"></div>
+              <footer class="card-footer"></footer>
+            </div>
+           
+          </div>
+          <div
+            class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+          </div>
+          <div
+            class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+          </div>
+          <div
+            class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+
+</html>
