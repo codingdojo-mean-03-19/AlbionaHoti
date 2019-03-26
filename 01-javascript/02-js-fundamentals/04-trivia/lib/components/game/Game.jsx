@@ -51,7 +51,8 @@ export default class Game extends Component {
       return res.map((item, key) =>
         (
           <div className="box" key={key}>
-            <h2 className="subtitle" key={key}>{JSON.parse(item.question.replace(/&quot;/g,'"'))}</h2>
+            {/* <h2 className="subtitle" key={key}>{JSON.parse(item.question.replace(/&quot;/g,'"'))}</h2> */}
+            <h2 className="subtitle" key={key}>{item.question}</h2>
           </div>
         ));
     }

@@ -10,7 +10,8 @@
     "webpack": "webpack -wd",
     "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
     "css-watch": "npm run css-build -- --watch",
-    "start": "npm run css-watch"
+    "start": "npm run css-watch",
+    "test": "jest --watch"
   },
   "babel": {
     "presets": [
@@ -25,6 +26,7 @@
     "css-loader": "^2.1.1",
     "eslint": "^5.15.3",
     "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.5.0",
     "node-sass": "^4.11.0",
     "webpack-cli": "^3.3.0"
   },
