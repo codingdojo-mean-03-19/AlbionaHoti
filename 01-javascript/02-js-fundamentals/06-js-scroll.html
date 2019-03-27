@@ -1,6 +1,6 @@
 <!-- <!DOCTYPE html> -->
 <html>
-<!-- <head>
+  <!-- <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -38,18 +38,15 @@
         el = document.getElementById('magic'),
         word_counter = 0,
         character_counter = 0;
-        // function count_chars(text) {
-        //   var char_count = 0;
-        //   for (var i = 0; i < text.length; i++) {
-        //     if (text.charAt(i) == ' ') {
-        //       char_count ++;
-        //     }
-        //     char_count ++;
-        //   }
-        //   return char_count;
-        // }
       function updateText() {
-        el.innerHTML = el.innerHTML + words[word_counter][character_counter++];
+
+        var char = words[word_counter][character_counter++];
+
+        if (char === ' ') {
+          char = '&nbsp;' // use non-breaking space character
+        }
+
+        el.innerHTML = el.innerHTML + char;
         if (character_counter == words[word_counter].length + 1) //the last letter shows up 
         {
           word_counter++; 	//choose a different word
