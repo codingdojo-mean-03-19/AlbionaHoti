@@ -96,8 +96,6 @@ console.log(find(results, function (elem) {
   return elem === 3;
 }))
 
-console.log(res);
-
 function reduce(array, callback, memo) {
   const new_arr = [].concat(array);
   if (memo === undefined) {

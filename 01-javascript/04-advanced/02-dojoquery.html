@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <button id="click">Click</button>
+      <button id="hover">Hover</button>
+    </div>
+    <script>
+      (function (global) {
+        function $Dojo(id) {
+
+          this.myId = document.getElementById(id);
+
+          this.click = function (callback) {
+            this.myId.addEventListener('click', callback);
+          }
+
+          this.hover = function (onHover, offHover) {
+            this.myId.addEventListener('mouseover', onHover);
+            this.myId.addEventListener('mouseout', offHover);
+          }
+        
+        return this;
+      };
+
+        global.$Dojo = $Dojo;
+   
+
+      }) (window);
+
+      $Dojo("click").click(function () { alert("That was a click"); })
+      $Dojo("hover").hover(function () { console.log("That was a hovered on!"); })
+    </script>
+  </body>
+
+</html>
