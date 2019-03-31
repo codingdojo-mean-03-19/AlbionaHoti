@@ -124,7 +124,7 @@ var _ = {
     }
     return new_array;
   },
-  reduce: function (list, iterate, init) {
+  reduce: function (array, callback, memo) {
     // code here;
     const new_arr = [].concat(array);
     if (memo === undefined) {
