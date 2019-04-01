@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index File</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Welcome to our first landing page
+        </h1>
+        <p class="subtitle">
+          My first website with <strong>Node.Js</strong>!
+        </p>
+
+        <form action="/cat_sleepy" method="POST">
+          <figure class="image is-128x128">
+            <button type="submit">
+              <input type="text" name="first_cat" value="frist_cat" hidden>
+              <img src="../static/images/4.jpeg">
+              </input>
+            </button>
+          </figure>
+        </form>
+        <form action="/cuddles" method="POST">
+          <figure class="image is-128x128">
+            <button type="submit">
+              <input type="text" value="second_cat" name="second_cat" hidden>
+              <img src="../static/images/5.jpeg">
+              </input>
+            </button>
+          </figure>
+        </form>
+
+        <form action="/cat_thinking" method="POST">
+          <figure class="image is-128x128">
+            <button type="submit">
+              <input type="text" value="second_cat" name="second_cat" hidden>
+
+              <img src="../static/images/6.jpg">
+              </input>
+            </button>
+          </figure>
+        </form>
+      </div>
+    </section>
+  </body>
+
+</html>
