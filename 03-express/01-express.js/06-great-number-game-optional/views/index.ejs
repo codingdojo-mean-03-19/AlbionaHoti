@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <section class="section has-text-centered">
+        <h1 class="title">
+          Welcome to the Great Number Game!
+        </h1>
+        <p class="subtitle">
+          I am thinking of a number between <strong>1</strong>
+          and <strong>100</strong>!
+        </p>
+        <p class="subtitle">
+          Take a guess
+        </p>
+        <form id="one" action="/process" method="POST">
+          <div class="columns is-mobile is-centered">
+            <div class="column is-half">
+              <input class="input is-half is-primary" name="random" type="text" placeholder="Primary input">
+            </div>
+          </div>
+          <input type="submit" class="button is-primary is-outlined" value="Submit" />
+        </form>
+        <%if (results.res === 'Too low!') { %>
+        <div class="box has-background-danger is-half">
+          <p class="subtitle has-text-white"><%= results.res %></p>
+        </div>
+        <% } else if (results.res === 'Too high!') { %>
+        <div class="box has-background-danger is-half">
+          <p class="subtitle has-text-white"><%= results.res %></p>
+        </div>
+        <% } else if (results.res === 'was the number!') { %>
+        <div class="box has-background-primary is-half">
+          <p class="subtitle has-text-white"><%= results.resu %></p>
+          <form action="/again" method="POST">
+            <input type="submit" class="button is-warning is-outlined" value="Play again" />
+          </form>
+          <script>
+          $(document).ready(function(){
+
+            $('#one').hide();
+
+            });
+          </script>
+        </div>
+        <% } %>
+      </section>
+    </div>
+    </div>
+  </body>
+
+</html>
