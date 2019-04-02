@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <p class="subtitle">
+          Submitted information with <strong>Express</strong>!
+        </p>
+
+        <div class="box">
+          <p class="has-text-info has-text-weight-semibold">
+            Name: <%= results.name %>
+          </p>
+          <p class="has-text-info has-text-weight-semibold">
+              Location
+            <%= results.location %>
+          </p>
+          <p class="has-text-info has-text-weight-semibold">
+            Favorite Language: <%= results.favorite_lang %>
+          </p>
+          <p class="has-text-info has-text-weight-semibold">
+            Comment: <%= results.comment %>
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+
+</html>
