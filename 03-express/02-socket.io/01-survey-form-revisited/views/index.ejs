@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var socket = io(); // 1
+        $("#form_submitted").submit(function (event) {
+          socket.emit("posting_form", {
+            name: $('#name').val(),
+            location: $('#location').val(),
+            favorite_lang: $('#favorite_lang').val(),
+            comment: $('#comment').val()
+          });
+
+        });
+        socket.on("updated_message", function (data) {
+          console.log(data.msg);
+          $("#data").html(data.msg);
+        })
+        socket.on("random_number", function(data) {
+          $("ran_num").html(JSON.stringify(data.random));
+        })
+      });
+    </script>
+
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <p class="subtitle">
+            Wait for you socket messages!
+          </p>
+          <p class="subtitle has-background-info has-text-white-bis" id="data"></p>
+          <p class="subtitle has-background-primary has-text-white-bis" id="ran_num"></p>
+        </div>
+        <div class="box">
+          <h1 class="title">
+            Assignment: Survey Form
+          </h1>
+          <p class="subtitle">
+            Survey Form with <strong>Express</strong>!
+          </p>
+          <form action="" id="form_submitted">
+            <div class="field">
+              <label class="label">Your Name</label>
+              <div class="control">
+                <input class="input" id="name" name="name" type="text" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Dojo Location</label>
+              <div class="control">
+                <div class="select">
+                  <select name="location" id="location">
+                    <option>Seattle</option>
+                    <option>Online</option>
+                    <option>San Francisco</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Favorite Language</label>
+              <div class="control">
+                <div class="select">
+                  <select name="favorite_lang" id="favorite_lang">
+                    <option>JavaScript</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Comment</label>
+              <div class="control">
+                <textarea class="textarea" id="comment" name="comment" placeholder=""></textarea>
+              </div>
+            </div>
+            <div class="control">
+              <button class="button is-info">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+
+</html>
