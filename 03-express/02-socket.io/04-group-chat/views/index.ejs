@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Epic Button Game!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var socket = io(); // 1
+        $("#add_user").submit(function (event) {
+          socket.emit("new_user", {
+            user: $('#name').val(),
+          });
+
+          $(".modal").removeClass("is-active");
+          $('#second_box').show();
+        });
+        socket.on('login', function (data) {
+          // $(".modal").removeClass("is-active");
+          // $('#second_box').show();
+          $("#user_here").html(data);
+        });
+
+        $("#cancel").submit(function (event) {
+          $(".modal").removeClass("is-active");
+        })
+      });
+      $(document).ready(function () {
+        $(window).on('load', function () {
+          $('#myModal').addClass("is-active");
+          $('#second_box').hide();
+        });
+        $(".modal-close").click(function () {
+          $(".modal").removeClass("is-active");
+        });
+      })
+
+      $(document).ready(function () {
+        $("#send_message").submit(function (event) {
+          socket.emit("new_message", {
+            message: $('#message').val(),
+          });
+        });
+
+        socket.on('reg_message', function(data) {
+          $("#register_message").html(data.user, + "said: " + data.msg);
+        })
+      })
+    </script>
+    <style>
+      .form {
+        display: inline-block;
+      }
+
+      body {
+        width: 0 auto;
+        min-height: 960px;
+      }
+    </style>
+
+  </head>
+
+  <body id="body">
+    <section class="section">
+      <div class="container">
+        <div class="modal" id="myModal">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <!-- Any other Bulma elements you want -->
+            <div class="box">
+              <form action="" class="form" id="add_user">
+                <div class="control">
+                  <div class="field">
+                    <label class="subtitle">The page at https://localhost says:</label>
+                    <label class="label">Your Name</label>
+                    <div class="control">
+                      <input class="input" id="name" type="text" placeholder="">
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button class="button is-text is-primary" id="submit" type="submit">Submit</button>
+                    <button class="button is-text is-warning" id="cancel" type="submit">Cancel</button>
+                    <button class="modal-close"></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+        <div id="second_box">
+          <h2 class="subtitle has-text-info" id="user_here">Conversation Board</h2>
+          <div class="box">
+            <p class="subtitle" id="register_message"></p>
+          </div>
+          <div class="box">
+            <form action="" class="form" id="add_user">
+              <div class="control">
+                <div class="field">
+                  <div class="control">
+                    <input class="input" id="message" type="text" placeholder="Enter your message here">
+                  </div>
+                </div>
+                <div class="control">
+                  <button class="button is-text is-info" id="send_message" type="submit">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+</html>

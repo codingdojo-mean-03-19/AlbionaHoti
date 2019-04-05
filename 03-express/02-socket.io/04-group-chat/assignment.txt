@@ -1,0 +1,17 @@
+1) Create the client view - add the form
+2) use jquery to save the users input and emit it as 'a_new_user' and send data: name
+3) Have the server listen to 'a_new_user' event and trigger that event
+
+  3.1) - Have the server listen an event called 'new_user' with data:name
+
+  3.2) - We store the name of the new user in a variable/array/hash - called users
+         and will use this 'users' in the chat room somehow
+  
+   Have the server broadcast an event called 'new_user' together with the data: name - to the clients
+
+    Since we are building a chat room - we don't need to broadcast the list of the 'new_user' - we only 
+    need to save them somewhere - so we know that particular user has been registered - and redirect them
+    to the chatroom
+
+  3.3) - Redirect(jquery - show/hide chatroom) the registered users to another page - chatroom
+
