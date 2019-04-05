@@ -1,0 +1,14 @@
+Real-Time Colors
+
+1. Create a socket application that presents the user with 3 buttons for color options.
+
+2. When a user clicks on one of the options, all currently connected socket users should
+have their background change to that color.
+
+3. BONUS: As soon as a new user connects to our server, update their color with the most
+recent color previously selected by the last user.
+
+
+1) Create the three buttons - view
+2) Each button should have a form - which is connected with jquery
+ to send data about that particular color user selects
