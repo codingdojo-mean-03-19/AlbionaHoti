@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Epic Button Game!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var socket = io(); // 1
+        $("#counter_form").submit(function (event) {
+          socket.emit("counter", {
+            counter: 1,
+          });
+        });
+        $("#reset_form").submit(function (event) {
+          socket.emit("reset", {
+            counter: 0,
+          });
+        });
+        socket.on('counter', function(data) {
+          $("#data-counter").html('The button has been pushed ' + JSON.stringify(data.data) + " times!");
+        })
+        socket.on('reset_counter', function(data) {
+          $("#data-reset").html('The counter has been reset to ' + JSON.stringify(data.data) + " times!");
+        })
+      });
+    </script>
+
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <p class="subtitle">
+            Wait for you socket messages!
+          </p>
+          <p class="subtitle has-background-primary  has-text-white-bis" id="data-counter"></p>
+          <p class="subtitle has-background-primary  has-text-white-bis" id="data-reset"></p>
+        </div>
+        <div class="box">
+          <h1 class="title">
+            Epic Button Game
+          </h1>
+          <form action="" id="counter_form">
+            <div class="control">
+              <button class="button is-info">Push the epic button</button>
+            </div>
+          </form>
+          <div class="box">
+            <form action="" id="reset_form">
+              <div class="control">
+                <button class="button is-danger">Reset Count</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
