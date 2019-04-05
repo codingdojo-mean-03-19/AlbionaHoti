@@ -13,22 +13,47 @@
     <script type="text/javascript">
       $(document).ready(function () {
         var socket = io(); // 1
+        var current_user;
         $("#add_user").submit(function (event) {
           socket.emit("new_user", {
             user: $('#name').val(),
           });
 
+          $("#myModal").hide();
           $(".modal").removeClass("is-active");
           $('#second_box').show();
         });
         socket.on('login', function (data) {
-          // $(".modal").removeClass("is-active");
-          // $('#second_box').show();
+          $(".modal").removeClass("is-active");
+          $("#myModal").hide();
+          $('#second_box').show();
           $("#user_here").html(data);
+          $("#error").html("");
+
+          current_user = data.current_user;
+          var messages = data.messages;
+
+          var messageThread = "";
+      
+          for(var i=0; i<messages.length; i++) {
+            messageThread += messages[i].name + " said: " + messages[i].message;
+          }
+
+          $("#register_message").html(messageThread);
+
+        });
+
+        socket.on('user_new', function (data) {
+          $(".modal").addClass("is-active");
+          $('#second_box').hide();
+          $("#error").html(data.error);
+          $('#add_user').show();
+          // $("#user_here").html(data);
         });
 
         $("#cancel").submit(function (event) {
           $(".modal").removeClass("is-active");
+          $("#myModal").hide();
         })
       });
       $(document).ready(function () {
@@ -38,6 +63,7 @@
         });
         $(".modal-close").click(function () {
           $(".modal").removeClass("is-active");
+          $("#myModal").hide();
         });
       })
 
@@ -74,6 +100,7 @@
           <div class="modal-content">
             <!-- Any other Bulma elements you want -->
             <div class="box">
+              <p id="error"></p>
               <form action="" class="form" id="add_user">
                 <div class="control">
                   <div class="field">
