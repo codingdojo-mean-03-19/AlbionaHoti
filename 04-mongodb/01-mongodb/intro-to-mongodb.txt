@@ -1,0 +1,128 @@
+1. Create a database called 'my_first_db'.
+1. use my_first_db
+
+2. Create students collection.
+2. use students
+
+
+3. Each document you insert into this collection should have the following 
+  format: ({name: STRING, home_state: STRING, lucky_number: NUMBER, birthday: {month: NUMBER, day: NUMBER, year: NUMBER}})
+3. db.students.insert({name:'Albiona', home_state: 'Kosovo', lucky_number: 3, birthday: {month: 11, day: 19, year: 1995}})
+ 
+4. Create 5 students with the appropriate info.
+4. > db.students.insert({name:'Albiona', home_state: 'Kosovo', lucky_number: 3, birthday: {month: 11, day: 19, year: 1995}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'Kristi', home_state: 'Albania', lucky_number: 7, birthday: {month: 04, day: 12, year: 1992}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'Albert', home_state: 'Kosovo', lucky_number: 12, birthday: {month: 09, day: 26, year: 1998}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'Krista', home_state: 'Kosovo', lucky_number: 54, birthday: {month: 01, day: 01, year: 1991}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'Rinor', home_state: 'Kosovo', lucky_number:37 , birthday: {month: 01, day: 22, year: 1993}})
+
+5. Get all students.
+5. db.students.find().pretty()
+{
+	"_id" : ObjectId("5cab1b7b1cef6d9a0665daf4"),
+	"name" : "Albiona",
+	"home_state" : "Kosovo",
+	"lucky_number" : 3,
+	"birthday" : {
+		"month" : 11,
+		"day" : 19,
+		"year" : 1995
+	}
+}
+{
+	"_id" : ObjectId("5cab1ba81cef6d9a0665daf5"),
+	"name" : "Kristi",
+	"home_state" : "Albania",
+	"lucky_number" : 7,
+	"birthday" : {
+		"month" : 4,
+		"day" : 12,
+		"year" : 1992
+	}
+}
+{
+	"_id" : ObjectId("5cab1bc31cef6d9a0665daf6"),
+	"name" : "Albert",
+	"home_state" : "Kosovo",
+	"lucky_number" : 12,
+	"birthday" : {
+		"month" : 9,
+		"day" : 26,
+		"year" : 1998
+	}
+}
+{
+	"_id" : ObjectId("5cab1bd81cef6d9a0665daf7"),
+	"name" : "Krista",
+	"home_state" : "Kosovo",
+	"lucky_number" : 54,
+	"birthday" : {
+		"month" : 1,
+		"day" : 1,
+		"year" : 1991
+	}
+}
+
+6. Retrieve all students who are from California (San Jose Dojo) or Washington (Seattle Dojo).
+6. db.students.find({home_state: 'Albania'}).pretty()
+{
+	"_id" : ObjectId("5cab1ba81cef6d9a0665daf5"),
+	"name" : "Kristi",
+	"home_state" : "Albania",
+	"lucky_number" : 7,
+	"birthday" : {
+		"month" : 4,
+		"day" : 12,
+		"year" : 1992
+	}
+}
+
+7. Get all students whose lucky number is:
+
+7. 
+greater than 3 -> db.students.find({lucky_number: {$gt: 3}}).pretty()
+less than or equal to 10 -> db.students.find({lucky_number: {$lte: 10}}).pretty()
+between 1 and 9 (inclusive) -> db.students.find({lucky_number: {$gte: 1, $lte: 9}}).pretty()
+
+
+8. Add a field to each student collection called 'interests' that is an ARRAY.  It should contain the following entries: 'coding', 'brunch', 'MongoDB'. Do this in ONE operation.
+8. db.students.update({}, {$set: {interests: ['coding', 'brunch', 'MongoDB']}}, false, true)
+false: > goes for Upsert flag: if set to true, creates a new document when no document matches the query criteria
+true: > goes for Multi flag: if set to true, updates multiple documents that meet the query criteria. If set to false, updates one document
+
+9. Add some unique interests for each particular student into each of their interest arrays.
+9. db.students.update({name: "Krista"}, {$set: {interests: ['painting']}})
+
+10. Add the interest 'taxes' into someone's interest array.
+10. db.students.update({name: "Albert"}, {$set: {interests: ['taxes']}})
+
+11. Remove the 'taxes' interest you just added.
+11. db.students.update({name:"Albert"}, {$pull: {interests: 'taxes'}})
+
+12. Remove all students who are from California.
+12. db.students.remove({home_state: 'Kosovo'})
+
+13. Remove a student by name.
+13. db.students.remove({name: "Kristi"})
+
+14. Remove a student whose lucky number is greater than 5 (JUST ONE)
+14. db.students.remove({lucky_number: {$gt: 5}}, true)
+
+15. Add a field to each student collection called 'number_of_belts' and set it to 0.
+15. db.students.update({}, {$set: {"number_of_belts": 0}}, false, true)
+
+16. Increment this field by 1 for all students in Washington (Seattle Dojo).
+16. db.students.update({belt:"black"}, {$set: {number_of_belts: 1}})
+
+17. Rename the 'number_of_belts' field to 'belts_earned'
+17. db.students.update({}, {$rename: {'number_of_belts': 'belts_earned'}}, false, true)
+
+18. Remove the 'lucky_number' field.
+19. db.students.update({}, {$unset: {lucky_number:1 }}, false, true)
+
+20. Add a 'updated_on' field, and set the value as the current date.
+20. db.students.update({}, {$unset: {lucky_number:1 }}, false, true)

@@ -30,15 +30,21 @@ io.on('connection', function(socket) {
 
   socket.on('green', function(data) {
     color = data.color;
-    socket.emit('color', { data: color });
+    // socket.emit('color', { data: color });
+
+    io.emit('color', { data: color });
   })
   socket.on('blue', function(data) {
     color = data.color;
-    socket.emit('color', { data: color });
+    // socket.emit('color', { data: color });
+
+    io.emit('color', { data: color });
   })
   socket.on('yellow', function(data) {
     color = data.color;
-    socket.emit('color', { data: color });
+    // socket.emit('color', { data: color });
+
+    io.emit('color', { data: color });
   })
 
 })
