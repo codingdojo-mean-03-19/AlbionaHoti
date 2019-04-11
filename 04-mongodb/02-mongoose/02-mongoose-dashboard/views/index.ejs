@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mongooses!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <% if(messages.mongooses) { %>
+          <% for(var message of messages.mongooses) { %>
+            <h2 class="has-text-danger"> <%= message %> </h2>
+          <% } %>
+        <% } %>
+        <h1 class="title">
+          Hello to Mongooses website
+        </h1>
+        <p class="subtitle">
+          My second website with <strong>MongoDB</strong>!
+        </p>
+        <form action="/mongooses/new" method="GET">
+          <button type="submit" class="button is-primary is-rounded">Add new Mongoose</button>
+        </form>
+
+        <% if(data) { %>
+          <% data.forEach(function(mongoose) { %>
+          <div class="card">
+            <section class="section">
+              <div class="card-content">
+                <p class="subtitle has-text-info">
+                  Mongoose Name: <%= mongoose.name %>
+                </p>
+                <p class="subtitle">
+                  <%= mongoose.color %>
+                </p>
+
+                <form action='/mongooses/edit/<%= mongoose._id %>'  method="GET">
+                  <button type="submit" class="button is-info is-small is-rounded">Edit Mongoose</button>
+                </form>
+                <form action='/mongooses/destroy/<%= mongoose._id %>'  method="POST">
+                  <button type="submit" class="button is-danger is-small is-rounded">Delete Mongoose</button>
+                </form>
+              </div>
+            </section>
+          </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </section>
+  </body>
+
+</html>

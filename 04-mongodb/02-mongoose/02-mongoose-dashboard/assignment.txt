@@ -1,0 +1,40 @@
+This exercise will allow you to utilize all 4 CRUD methods with Mongoose. In this exercise, you'll build an app which manages a pack of some kind of animal (think otter, rabbit, or owl). You need to be able to add a new animal, update it, and delete it. You should use the following routes to build this app:
+
+GET '/' Displays all of the mongooses.
+GET '/mongooses/:id' Displays information about one mongoose.
+GET '/mongooses/new' Displays a form for making a new mongoose.
+POST '/mongooses' Should be the action attribute for the form in the above route (GET '/mongooses/new').
+GET '/mongooses/edit/:id' Should show a form to edit an existing mongoose.
+POST '/mongooses/:id' Should be the action attribute for the form in the above route (GET '/mongooses/edit/:id').
+POST '/mongooses/destroy/:id' Should delete the mongoose from the database by ID.
+Remember these routes are just examples, avoid using mongooses for your dashboard if you can!
+
+1. Dependencies
+express
+body-parser
+ejs
+mongoose
+express-session
+flash
+
+2. Views
+get: index.ejs file - display all mongooses
+get: mongooses.ejs => mongooses/:id -> info about one mongoose
+get: mongooses/new.ejs => a form for a new mongoose
+post: mongooses -> have the route 'mongooses/new'
+get: mongooses/edit/:id - edit.ejs view - should show a form to edit the existing mongoose
+post: mongooses/:id should be the action attribute for the form in the above route (GET '/mongoose/edit/:id)
+post: mongoose/destroy/:id -> Should delete the mongoose from db by id
+
+3. Server
+
+Set up Server
+Set up the Views
+Set up the routes:
+  GET '/' => render index page with the mongooses
+  GET '/mongooses/:id' =>  render profile for one mongoose
+  GET '/mongooses/new' => render a form for new mongoose
+  POST '/mongooses' => have the route to that comes from 'mongooses/new'
+  GET '/mongooses/edit/:id' => render the details page
+  POST: '/mongooses/:id' -> should be the action attribute for the form in the above route (GET '/mongoose/edit/:id)
+  POST: '/mongoose/destroy/:id' -> should 
