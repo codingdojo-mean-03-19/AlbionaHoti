@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 app.use(session({
   secret: 'keyboardkitteh',
-  resave: false,
+  resave: false, 
   saveUninitialized: true,
   cookie: { maxAge: 60000, secure: !true }
 }));
