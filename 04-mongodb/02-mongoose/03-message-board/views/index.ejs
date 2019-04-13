@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message Board!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Hello! Welcome to the Message Board app
+        </h1>
+        <p class="subtitle">
+          My third website with <strong>MongoDB</strong>!
+        </p>
+      </div>
+      <% if(messages.messages) { %>
+        <% for(var x of messages.messages) { %>
+          <h3><%= x %></h3>
+        <% } %>
+      <% } %>
+
+      <% if(messages.users) { %>
+        <% for(var x of messages.users) { %>
+          <h3><%= x %></h3>
+        <% } %>
+      <% } %>
+
+      <div class="box">
+        <form action="/message" method="POST">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" name="name" type="text" placeholder="Text input">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+              <textarea class="textarea" name="message" placeholder="Textarea"></textarea>
+            </div>
+          </div>
+          <div class="control">
+            <button class="button is-primary">Submit</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3 class="subtitle has-text-info">Messages</h3>
+
+    </section>
+  </body>
+
+</html>

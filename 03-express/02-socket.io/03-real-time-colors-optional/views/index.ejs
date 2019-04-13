@@ -13,35 +13,35 @@
     <script type="text/javascript">
       $(document).ready(function () {
         var socket = io(); // 1
-        $("#green_form").submit(function (event) {
+        $("#green_form").click(function (event) {
           socket.emit("green", {
             color: 'green',
           });
         });
-        $("#blue_form").submit(function (event) {
+        $("#blue_form").click(function (event) {
           socket.emit("blue", {
             color: 'blue',
           });
         });
-        $("#yellow_form").submit(function (event) {
+        $("#yellow_form").click(function (event) {
           socket.emit("yellow", {
             color: 'yellow',
           });
         });
-        socket.on('color', function(data) {
+        socket.on('color', function (data) {
           $("#body").css('background-color', data.data);
         });
       });
     </script>
     <style>
-    .form {
-      display: inline-block;
-    }
+      .form {
+        display: inline-block;
+      }
 
-    body {
-      width: 0 auto;
-      min-height: 960px;
-    }
+      body {
+        width: 0 auto;
+        min-height: 960px;
+      }
     </style>
 
   </head>
@@ -50,23 +50,18 @@
     <section class="section">
       <div class="container">
         <div class="box">
-          <form action="" class="form" id="green_form">
-            <div class="control">
-              <button class="button is-info has-background-primary is-large">Green</button>
-            </div>
-          </form>
-          <form action="" class="form" id="blue_form">
-            <div class="control">
-              <button class="button is-info has-background-info is-large">Blue</button>
-            </div>
-          </form>
-          <form action="" class="form" id="yellow_form">
-            <div class="control">
-              <button class="button is-info has-background-warning is-large">Yellow</button>
-            </div>
-          </form>
+          <div class="control">
+            <button class="button is-info has-background-primary is-large" id="green_form">Green</button>
+          </div>
+          <div class="control">
+            <button class="button is-info has-background-info is-large" id="blue_form">Blue</button>
+          </div>
+          <div class="control">
+            <button class="button is-info has-background-warning is-large" id="yellow_form">Yellow</button>
+          </div>
         </div>
       </div>
     </section>
   </body>
+
 </html>
