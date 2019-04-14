@@ -21,18 +21,19 @@
       </div>
       <% if(messages.messages) { %>
         <% for(var x of messages.messages) { %>
-          <h3><%= x %></h3>
+        <h3><%= x %></h3>
         <% } %>
       <% } %>
 
       <% if(messages.users) { %>
         <% for(var x of messages.users) { %>
-          <h3><%= x %></h3>
+        <h3><%= x %></h3>
         <% } %>
       <% } %>
 
       <div class="box">
-        <form action="/message" method="POST">
+        <form action="/messages" method="POST">
+          <p class="has-text-danger">Write a message</p>
           <div class="field">
             <label class="label">Name</label>
             <div class="control">
@@ -57,9 +58,27 @@
     <section class="section">
       <h3 class="subtitle has-text-info">Messages</h3>
       <% for(const message of messages) { %>
+      <div class="box">
+        <p class="subtitle has-text-primary"><%= message.message %></p>
+
         <div class="box">
-          <p class="has-text-primary"><%= message.message %></p>
+          <form action="/comments" method="POST">
+            <div class="field">
+              <label class="label">Comment</label>
+              <% for(const comment of message.comments) { %>
+                <p class="has-text-info"><%= comment.comment %></p>
+              <% } %>
+              <div class="control">
+                <input class="input" name="comment" type="text" placeholder="Text input">
+                <input class="" name="message" type="hidden" value="<%= message._id%>">
+              </div>
+            </div>
+            <div class="control">
+              <button class="button is-warning">Submit</button>
+            </div>
+          </form>
         </div>
+      </div>
       <% } %>
     </section>
   </body>

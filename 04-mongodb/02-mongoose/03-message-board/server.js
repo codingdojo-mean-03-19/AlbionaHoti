@@ -31,12 +31,11 @@ mongoose.connect('mongodb://localhost/message_board', { useNewUrlParser: true })
 mongoose.Promise = global.Promise;
 
 var CommentSchema = new mongoose.Schema({
-  comment: { type: String,  minlength: 10, trim: true },
+  comment: { type: String,  minlength: 4, trim: true },
   message: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Message',
-      required: true
     }
   ]
 }, { timestamps: true });
@@ -46,7 +45,7 @@ var MessageSchema = new mongoose.Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Comment'
+      ref: 'Comment',
     }
   ]
 }, { timestamps: true });
@@ -68,19 +67,53 @@ var User = mongoose.model('User', UserSchema);
 app.get('/messages', function(req, res) {
   Message.find({})
     .populate('comments')
-    .then(messages => res.render('index', { messages: messages.reverse() }))
-});
+    .then(messages => {
+      res.render('index', { messages: messages.reverse() })
+      // console.log("Messages", messages)
+    })
+    // // .then(() => {
+    // //   User.find({})
+    // //     .populate('messages')
+    // //     .then(users => {
+    // //       res.render('index', { users })
+    // //     })
+    // })
+    .catch(err => { console.log('Something went wrong while getting messages: ', err)})
+  });
 
-app.post('/message', function(req, res) {
+app.post('/messages', function(req, res) {
   console.log("Message req body: ", req.body);
   // we Create a new user and message with the data from req.body
 
   Message.create(req.body)
     .then(message => {
-      console.log('Message created: ', message);
+      // console.log('Message created: ', message);
       res.redirect('/messages');
     })
     .catch(err => { console.log("Error on message create: ", err)});
 });
+
+app.post('/comments', function(req, res) {
+  console.log("Body: ", req.body);
+  Comment.create(req.body) 
+    .then(comment => {
+      console.log(comment);
+      console.log("Comment.message", comment.message);
+      
+      return Message.findById(comment.message)
+        .then(message => {
+          console.log('Message hereeee:', message.comments);
+          message.comments.push(comment._id);
+
+          return message.save();
+        })
+        .then(() => {
+          res.redirect('/messages');
+        })
+        .catch(err => {
+          console.log('Something went wrong: ', err);
+        })
+    });
+})
 
 app.listen(port, () => console.log(`Express server listening on port: ${port}!`));
