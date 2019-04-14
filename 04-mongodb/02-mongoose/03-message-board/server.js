@@ -24,53 +24,63 @@ app.use(session({
 // mongoose provides more structure to mongoDB by adding schemas
 // -> we can create -> that turn into models for our collections
 
+const { Schema } = mongoose;
+
 mongoose.connect('mongodb://localhost/message_board', { useNewUrlParser: true });
 
 mongoose.Promise = global.Promise;
 
 var CommentSchema = new mongoose.Schema({
-  comment: { type: String,  minlength: 10 }
+  comment: { type: String,  minlength: 10, trim: true },
+  message: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Message',
+      required: true
+    }
+  ]
 }, { timestamps: true });
 
 var MessageSchema = new mongoose.Schema({
   message: { type: String, required: [true, "Message is required!"], minlength: 10 },
-  comments: [CommentSchema]
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ]
 }, { timestamps: true });
 
 var UserSchema = new mongoose.Schema({
   name: { type: String, required: [true, "Name is required!"], minlength: 5 },
-  messages: [MessageSchema]
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Message'
+    }
+  ]
 }, { timestamps: true });
 
-mongoose.model('Comment', CommentSchema);
-var Comment = mongoose.model('Comment');
-mongoose.model('Message', MessageSchema);
-var Message = mongoose.model('Message');
-mongoose.model('User', UserSchema);
-var User = mongoose.model('User');
+var Comment = mongoose.model('Comment', CommentSchema);
+var Message = mongoose.model('Message', MessageSchema);
+var User = mongoose.model('User', UserSchema);
 
-app.get('/', function(req, res) {
-
-  res.render('index');
+app.get('/messages', function(req, res) {
+  Message.find({})
+    .populate('comments')
+    .then(messages => res.render('index', { messages: messages.reverse() }))
 });
 
 app.post('/message', function(req, res) {
   console.log("Message req body: ", req.body);
   // we Create a new user and message with the data from req.body
 
-  var message = new Message({name: req.body.name, message: req.body.message });
-  message.save(function(err) {
-    if(err) {
-      console.log('Something happened while creating message: ', err);
-      for(var key in err.errors) {
-        req.flash('messages', err.errors[key].message);
-      }
-      res.redirect('/');
-    } else {
-      console.log('Successfully created message');
-      res.redirect('/');
-    }
-  })
+  Message.create(req.body)
+    .then(message => {
+      console.log('Message created: ', message);
+      res.redirect('/messages');
+    })
+    .catch(err => { console.log("Error on message create: ", err)});
 });
 
 app.listen(port, () => console.log(`Express server listening on port: ${port}!`));

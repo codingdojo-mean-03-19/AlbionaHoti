@@ -56,7 +56,11 @@
 
     <section class="section">
       <h3 class="subtitle has-text-info">Messages</h3>
-
+      <% for(const message of messages) { %>
+        <div class="box">
+          <p class="has-text-primary"><%= message.message %></p>
+        </div>
+      <% } %>
     </section>
   </body>
 
