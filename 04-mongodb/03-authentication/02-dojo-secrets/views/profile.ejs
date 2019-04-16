@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Comment on this Secret
+        </h1>
+        <% if(messages.comments) { %>
+          <% for(var message of messages.comments) { %>
+            <h2 class="has-text-danger"> <%= message %> </h2>
+          <% } %>
+        <% } %>
+        <p class="control subtitle">
+          Welcome <strong><%= user.first_name %></strong>!
+          <a href="/logout" class="button is-warning" type="text" placeholder="">Logout </a>
+          <a href="/" class="button" type="text" placeholder="">Home </a>
+        </p>
+        <div class="our-table">
+          <div class="panel panel-primary" id="result_panel">
+            <div class="panel-heading">
+              <h3 class="panel-title has-text-danger subtitle is-uppercase is-italic has-text-weight-semibold"><%= secret.secret %></h3>
+            </div>
+
+            <!-- for comments -->
+            <% if(comments) { %>
+              <div class="panel-body">
+                <ul class="list-group">
+                  <% for(const comment of comments) { %>
+                    <li class="list-group-item">
+                      <p class="has-text-info"><%= comment.comment %></p>
+                    </br>
+                    </li>
+                  <% } %>
+                </ul>
+              </div>
+            <% } %>
+
+            <div class="box">
+              <div class="columns">
+                <div class="column is-two-fifths">
+                  <form action="/comments" method="POST">
+                    <div class="field">
+                      <label class="label">Comment</label>
+                      <div class="control">
+                        <input class="input" name="comment" type="text" placeholder="Comment input">
+                        <input class="input" name="secret" type="hidden" value="<%= secret._id %>" placeholder="">
+                      </div>
+                    </div>
+                    <div class="control">
+                      <button class="button is-text">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+</html>

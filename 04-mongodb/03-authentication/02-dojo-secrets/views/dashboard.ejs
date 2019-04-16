@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secrets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <style>
+    .list-group {
+      max-height: 300px;
+      margin-bottom: 10px;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .box {
+      background-color: #ffb3b3;
+    }
+  </style>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Dojo Secret
+        </h1>
+        <% if(messages.secrets) { %>
+          <% for(var message of messages.secrets) { %>
+            <h2 class="has-text-danger"> <%= message %> </h2>
+          <% } %>
+        <% } %>
+       
+        <% if(messages.comments) { %>
+          <% for(var message of messages.comments) { %>
+            <h2 class="has-text-danger"> <%= message %> </h2>
+          <% } %>
+        <% } %>
+        <p class="control subtitle">
+          Welcome <strong><%= user.first_name %></strong>!
+          Welcome <strong><%= user._id %></strong>!
+          <a href="/logout" class="button is-warning" type="text" placeholder="">Logout </a>
+        </p>
+        <div class="box">
+          <div class="columns">
+            <div class="column is-two-fifths">
+              <form action="/secrets" method="POST">
+                <div class="field">
+                  <label class="label">Secret</label>
+                  <div class="control">
+                    <input class="input" name="secret" type="text" placeholder="Secret input">
+                    <input class="input" name="user" type="hidden" value="<%= user._id %>" placeholder="">
+                  </div>
+                </div>
+                <div class="control">
+                  <button class="button is-text">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% if(secrets) { %>
+          <div class="our-table">
+          <div class="panel panel-primary" id="result_panel">
+            <div class="panel-heading">
+              <h3 class="panel-title">Result List</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <% for(const secret of secrets ) { %>
+                <a href="/secret/<%= secret._id %>">
+                  <li class="list-group-item">
+                    <strong><%= secret.secret %></strong>
+                    <% if(user._id === secret.user) { %>
+                      <a href=`"/delete/${secret._id}"` class="button">Delete</a>
+                    <% } %>
+                  </li>
+                </a>
+              
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <% } %>
+      </div>
+    </section>
+  </body>
+
+</html>
