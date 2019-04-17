@@ -1,8 +1,4 @@
-
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/quote_db', { useNewUrlParser: true });
-mongoose.Promise = global.Promise;
-
 
 var QuoteSchema = new mongoose.Schema({
   name: { type: String, required: true, minlength: 5 },
