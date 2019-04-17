@@ -22,15 +22,7 @@ app.use(session({
   cookie: { maxAge: 60000 }
 }));
 
-mongoose.connect('mongodb://localhost/quote_db', { useNewUrlParser: true });
-mongoose.Promise = global.Promise;
-
-var QuoteSchema = new mongoose.Schema({
-  name: { type: String, required: true, minlength: 5 },
-  quote: { type: String, required: true, minlength: 8 }
-}, { timestamps: true });
-
-mongoose.model('Quote', QuoteSchema); // we are setting this Schema in our models as 'Quote'
+require('./server/models/quote');
 require('./server/config/routes')(app);
 
 app.listen(port, () => console.log(`Express server listening on port ${port}`));
