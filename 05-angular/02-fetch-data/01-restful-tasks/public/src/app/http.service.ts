@@ -8,7 +8,7 @@ export class HttpService {
 
   constructor(private _http: HttpClient) {
     this.getTasks();
-    // this.getOneTask();
+    this.getOneTask();
    }
 
    getTasks() {
@@ -16,9 +16,9 @@ export class HttpService {
      tempObservable.subscribe(data => console.log("Got our tasks: ", data));
    }
 
-  //  getOneTask() {
-  //    let tempObersvable = this._http.get('/tasks/:id');
-  //    tempObersvable.subscribe(data => console.log("Got our task: ", data));
-  //  }
+   getOneTask() {
+     let tempObersvable = this._http.get('/tasks/:id');
+     tempObersvable.subscribe(data => console.log("Got our task: ", data));
+   }
   
 }
