@@ -7,13 +7,14 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private _http: HttpClient) {
-    this.getAuthors();
+    // this.getAuthors();
    }
 
    getAuthors() {
-     let authors = this._http.get('/authors');
+    //  let authors = 
 
-     authors.subscribe(data => console.log('All Authors: ', data));
+     return this._http.get('/authors');;
+    //  authors.subscribe(data => console.log('All Authors: ', data));
    }
 
   //  getAuthor() {
