@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
+import { observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-root',
@@ -28,5 +29,16 @@ export class AppComponent implements OnInit {
     this.first_name = "Alpha";
     this.snacks = ["Vanilla latte with skim milk", "brushed suede", "cookie"];
     this.loggedIn = true;
+  }
+
+  do(event) {
+    console.log(event);
+  }
+
+  onButtonClickParam(num: Number): void {
+    console.log(`Click event is working with num param: ${num}`);
+    // call the service's method to post the data, but make sure the data is bundled up in an object
+    let observable = this._httpService.postToServer({data: num});
+    observable.subscribe(data => console.log("Got our data!", data));
   }
 }
