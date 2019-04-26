@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Ninja Gold</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+        <style>
+            body {
+                margin: 0 auto;
+            }
+
+            .container {
+                margin: 50px;
+            }
+
+            .gold {
+                padding: 10px;
+                border: 1px solid black;
+                display: inline-block;
+            }
+
+            .locations {
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .location {
+                margin: 10px;
+                padding: 20px;
+                text-align: center;
+                border: 1px solid black;
+                width: 250px;
+            }
+
+            .activities {
+                margin-top: 20px;
+                height: 250px;
+                overflow-y: auto;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="has-text-primary">Hello Albiona</h1>
+            <div class="gold">
+                {{ your_gold }}
+            </div>
+            <div class="locations">
+                <div class="location">
+                    <h2>Farm</h2>
+                    <p>(earns 10-20 golds)</p>
+                    <button class="button is-info"
+                        (click)="postToNinja('Farm', 15, 'You added 15 to your total Gold')">Find Gold!</button>
+                </div>
+                <div class="location">
+                    <h2>Cave</h2>
+                    <p>(earns 5-10 golds)</p>
+                    <button class="button is-info"
+                        (click)="postToNinja('Cave', 7, 'You added 7 to your total Gold')">Find Gold!</button>
+                </div>
+                <div class="location">
+                    <h2>House</h2>
+                    <p>(earns 2-5 golds)</p>
+                    <button class="button is-info"
+                        (click)="postToNinja('House', 3, 'You added 3 to your total Gold')">Find Gold!</button>
+                </div>
+                <div class="location">
+                    <h2>Casino</h2>
+                    <p>(earns/takes 0-50 golds)</p>
+                    <button class="button is-info"
+                        (click)="postToNinja('Casino', 50, 'You added 50 to your total Gold')">Find Gold!</button>
+                </div>
+            </div>
+
+            <h2 class="sub-title has-text-info">Your activities</h2>
+            <div class="activities">
+                <p *ngFor="let activity of activities" class="has-text-info">{{ activity }}</p>
+            </div>
+        </div>
+    </body>
+
+</html>
