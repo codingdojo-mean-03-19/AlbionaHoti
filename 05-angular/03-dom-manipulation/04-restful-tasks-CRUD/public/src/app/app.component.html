@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to CRUD!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">New Task</h1>
+        <p class="subtitle">My X website with <strong>Angular</strong>!</p>
+      </div>
+      <section class="section">
+        <div class="columns">
+          <div class="column">
+            <p class="subtitle">All the <strong>Tasks</strong>!</p>
+            <div class="box" *ngFor="let task of tasks">
+              Title:
+              <p class="has-text-warning">{{ task.title }}</p>
+              Description:
+              <p class="has-text-info">{{ task.description }}</p>
+              Completed:
+              <p class="has-text-primary">{{ task.completed }}</p>
+              <button class="button is-info" (click)="getEditTask(task._id)">
+                Edit
+              </button>
+            </div>
+          </div>
+          <div class="column" *ngIf="edit">
+            <p class="subtitle">
+              Edit the <strong>Task {{ editingTask.title }}</strong
+              >!
+            </p>
+            <div class="box">
+              <form (submit)="onEditing($event, form)" #form="ngForm">
+                <div class="field">
+                  <label class="label">Title</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      name="title"
+                      [(ngModel)]="editingTask.title"
+                      value="editingTask.title"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Description</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      name="description"
+                      value="editingTask.description"
+                      [(ngModel)]="editingTask.description"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Completed</label>
+                  <div class="control">
+                    <div class="select">
+                      <select
+                        name="completed"
+                        [(ngModel)]="editingTask.completed"
+                      >
+                        <option value="editingTask.completed">True</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="control">
+                  <button class="button is-link">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="column">
+            <p class="has-text-primary subtitle">Register a task</p>
+            <form (submit)="onRegister($event, form)" #form="ngForm">
+              <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    name="title"
+                    [(ngModel)]="task.title"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    name="description"
+                    [(ngModel)]="task.description"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Completed</label>
+                <div class="control">
+                  <div class="select">
+                    <select name="completed" [(ngModel)]="task.completed">
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="control">
+                <button class="button is-link">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>
