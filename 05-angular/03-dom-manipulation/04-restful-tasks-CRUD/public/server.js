@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const { PORT: port = 8000 } = process.env;
+const { PORT: port = 3030 } = process.env;
 const app = express();
 require('./server/config/database');
 

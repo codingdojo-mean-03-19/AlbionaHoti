@@ -20,8 +20,13 @@ export class HttpService {
   }
 
   editTask(task) {
-    console.log('EDITTOTOTOOTTOT', task.editTask);
-    const id = task.editTask.id;
-    return this._http.put('/tasks/' + id, task.editTask);
+    console.log('EDITTOTOTOOTTOT', task);
+    const id = task._id;
+    return this._http.put(`/tasks/${id}`, task);
+  }
+
+  deleteTask(task) {
+    console.log('Task to delete: ', task);
+    return this._http.delete(`/tasks/${task}`);
   }
 }

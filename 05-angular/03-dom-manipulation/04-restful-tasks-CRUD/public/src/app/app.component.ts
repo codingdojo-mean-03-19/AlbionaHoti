@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   editTask = new Task();
   tasks: Task[] = [];
   edit = false;
-  editingTask: object;
+  editingTask;
   // tslint:disable-next-line:variable-name
   constructor(private _httpService: HttpService) {}
 
@@ -61,30 +61,30 @@ export class AppComponent implements OnInit {
       console.log('Got one data for edit: ', data);
       this.edit = true;
       this.editingTask = data.task;
-      console.log('Editing task: ', data.task);
+
+      console.log('Editing task: ', this.editingTask);
     });
   }
 
   onEditing(event: Event, form: NgForm) {
     event.preventDefault();
 
-    console.log('Submit edit task', this.editTask);
+    console.log('Submit edit task', this.editingTask);
 
-    this.updateTask(this.editingTask);
-
-    // this.editTask = this.editingTask;
-
-    // this.editTask = new Task();
-    console.log('EDIT task: ', this.editingTask);
-
-    // form.reset();
-  }
-
-  updateTask(editTask) {
-    console.log('EDIT TASK: ', editTask);
-    const editObservable = this._httpService.editTask({ editTask });
+    const taskToEdit = this.editingTask;
+    const editObservable = this._httpService.editTask(taskToEdit);
     editObservable.subscribe(data => {
       console.log('IT WORKED WE EDIT IT: ', data);
+      this.getTasks();
+    });
+  }
+
+  deleteTask(task) {
+    console.log('Delete TASK: ', task);
+    const taskToDelete = this._httpService.deleteTask(task);
+    taskToDelete.subscribe(data => {
+      console.log('Heh deleted!', data);
+      this.getTasks();
     });
   }
 }

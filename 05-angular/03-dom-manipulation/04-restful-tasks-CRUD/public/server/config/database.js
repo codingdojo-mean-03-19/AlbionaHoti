@@ -7,6 +7,7 @@ const modelsPath = path.join(__dirname, '../models');
 mongoose.connect('mongodb://localhost/restful-CRUD', {
   useCreateIndex: true,
   useNewUrlParser: true,
+  useFindAndModify: false,
 });
 
 mongoose.connection.once('connected', () =>

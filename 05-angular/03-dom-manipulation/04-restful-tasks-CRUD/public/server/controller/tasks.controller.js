@@ -27,28 +27,16 @@ module.exports = {
   show(req, res) {
     const { id: task_id } = req.params;
     Task.findById({ _id: task_id })
-      .then(task => res.json({ message: 'Success', task: task }))
+      .then(task => res.json({ task: task }))
       .catch(error => res.status(Http.UnavailableForLegalReasons).json(error));
   },
 
-  update(req, res) {
-    const { id: task_id } = req.params;
+  update: (req, res) => {
+    const { id: taskId } = req.params;
 
-    Task.findById(task_id, req.body, { new: true })
-      .then(task => {
-        console.log('ID IN UPDATE: ', id);
-        console.log('REQ PARAMS: ', req.params);
-        console.log('REQ BODY: ', req.body);
-        res.json({ message: 'Success', task: task });
-      })
-
-      .catch(error => {
-        // we are assuming validation errors
-        const errors = Object.keys(error.errors).map(
-          key => error.errors[key].message
-        );
-        res.status(Http.UnprocessableEntity).json(errors);
-      });
+    Task.findByIdAndUpdate(taskId, req.body, { new: true })
+      .then(task => res.json(task))
+      .catch(error => res.status(Http.UnavailableForLegalReasons).json(error));
   },
 
   delete: function(req, res) {

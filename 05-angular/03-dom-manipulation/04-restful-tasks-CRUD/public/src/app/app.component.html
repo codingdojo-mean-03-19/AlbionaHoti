@@ -33,6 +33,9 @@
               <button class="button is-info" (click)="getEditTask(task._id)">
                 Edit
               </button>
+              <button class="button is-danger" (click)="deleteTask(task._id)">
+                Delete
+              </button>
             </div>
           </div>
           <div class="column" *ngIf="edit">
