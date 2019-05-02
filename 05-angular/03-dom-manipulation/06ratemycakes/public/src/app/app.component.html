@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Cakes!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Rate my Cakes</h1>
+        <p class="subtitle">My X website with <strong>Angular</strong>!</p>
+      </div>
+      <section class="section">
+        <div class="columns">
+          <div class="column is-one-third">
+            <p class="subtitle">All the <strong>Cakes</strong>!</p>
+            <div class="box" *ngFor="let cake of cakes">
+              <div class="content">
+                <img
+                  src="{{ cake.image }}"
+                  alt="one here"
+                  width="100"
+                  height="50"
+                />
+                <p class="has-text-warning">Baker: {{ cake.baker }}</p>
+              </div>
+              <form (submit)="onCommentRegister($event, formm)" #formm="ngForm">
+                <div class="field">
+                  <div class="control">
+                    <input
+                      class="input"
+                      value="{{ cake._id }}"
+                      name="comment.cake"
+                      (ngModel)="(comment.cake)"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Rate</label>
+                  <div class="control">
+                    <div class="select">
+                      <select name="comment.rate" [(ngModel)]="comment.rate">
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Comment</label>
+                  <div class="control">
+                    <textarea
+                      class="textarea"
+                      name="comment.content"
+                      placeholder="Comment"
+                      [(ngModel)]="comment.content"
+                    ></textarea>
+                  </div>
+                </div>
+                <button class="button is-info">
+                  Rate
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="column">
+            <p class="has-text-primary subtitle">Register a cake and rate</p>
+            <form (submit)="onRegister($event, form)" #form="ngForm">
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input"
+                    type="hidden"
+                    name="_id"
+                    [(ngModel)]="cake._id"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Baker</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    name="baker"
+                    [(ngModel)]="cake.baker"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Image</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    name="image"
+                    [(ngModel)]="cake.image"
+                  />
+                </div>
+              </div>
+
+              <div class="control">
+                <button class="button is-link">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>
