@@ -1,0 +1,19 @@
+<section class="section">
+  <h1 class="title">
+    Sell ShintoCoins
+  </h1>
+  <p class="subtitle">
+    Current ShintoCoin Value: <strong>$1.00</strong>
+    <br />
+    <strong></strong>
+  </p>
+
+  <p class="has-text-primary">Number of ShintoCoins Owned: {{ shintoCoin }}</p>
+
+  <form (submit)="onSell($event, form)" #form="ngForm">
+    <input type="text" class="input" name="answer" [(ngModel)]="coins.value" />
+    <button class="button is-text" type="submit">Submit</button>
+  </form>
+
+  <!-- <p class="has-text-info subtitle">{{ answer }}</p> -->
+</section>

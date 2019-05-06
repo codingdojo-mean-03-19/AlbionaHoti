@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Shinto</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img
+              src="https://www.codingdojo.com/blog/wp-content/uploads/Coding-Dojo-Academy-Horizontal.png"
+              width="112"
+              height="28"
+            />
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a [routerLink]="['/home']" class="navbar-item">
+              Home
+            </a>
+
+            <a [routerLink]="['/mine']" class="navbar-item">
+              Mine Coins
+            </a>
+            <a [routerLink]="['/buy']" class="navbar-item">
+              Buy Coins
+            </a>
+            <a [routerLink]="['/sell']" class="navbar-item">
+              Sell Coins
+            </a>
+            <a [routerLink]="['/browseledger']" class="navbar-item">
+              Browse Ledger
+            </a>
+          </div>
+        </div>
+      </nav>
+      <section class="section">
+        <h1 class="title">
+          ShintoCoin
+        </h1>
+        <p class="subtitle">
+          Welcome to ShintoCoins! ShintoCoins are coins made by solving
+          algorithms!
+          <br />
+          <strong>To get started, </strong> head over to Mine Coins and get to
+          work!
+        </p>
+      </section>
+
+      <router-outlet></router-outlet>
+    </div>
+  </body>
+</html>

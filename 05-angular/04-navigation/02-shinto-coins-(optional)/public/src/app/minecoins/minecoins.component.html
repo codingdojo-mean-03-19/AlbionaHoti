@@ -1,0 +1,25 @@
+<section class="section">
+  <h1 class="title">
+    Mine ShintoCoins
+  </h1>
+  <p class="subtitle">
+    Here you can mine ShintoCoins by being the first to solve the algorithm.
+    <br />
+    <strong></strong>
+  </p>
+
+  <p class="has-text-primary">{{ question }}</p>
+
+  <form (submit)="onSubmit($event, form)" #form="ngForm">
+    <input
+      type="text"
+      class="input"
+      name="answer"
+      [(ngModel)]="result.answer"
+    />
+    <button class="button is-text" type="submit">Submit</button>
+  </form>
+
+  <p class="has-text-info subtitle">{{ answer }}</p>
+  <p class="has-text-danger subtitle">{{ error }}</p>
+</section>
