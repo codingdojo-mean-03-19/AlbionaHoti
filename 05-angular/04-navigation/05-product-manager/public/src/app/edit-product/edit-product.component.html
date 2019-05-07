@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Bulma!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Edit the Product</h1>
+      <div class="column is-two-fifths">
+        <form (submit)="editProduct($event, form)" #form="ngForm">
+          <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="data.title"
+                [(ngModel)]="data.title"
+                minlength="4"
+                required
+                #title="ngModel"
+                value="{{ data.title }}"
+              />
+              <div
+                *ngIf="title.touched && title.errors"
+                class="has-text-danger"
+              >
+                You must enter a title for your product, and it should be longer
+                than 4 chars.
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Price</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="data.price"
+                [(ngModel)]="data.price"
+                #price="ngModel"
+                value="{{ data.price }}"
+              />
+              <div *ngIf="price.touched && price.errors">
+                You must enter a price for your product.
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Image Url</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="data.image_url"
+                [(ngModel)]="data.image_url"
+                value="{{ data.image_url }}"
+              />
+            </div>
+          </div>
+          <div class="control">
+            -
+            <button class="button is-text" type="submit">
+              Update
+            </button>
+          </div>
+        </form>
+        <button (click)="deleteProduct(data._id)" class="button is-text">
+          Delete
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
