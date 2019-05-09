@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quote!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <section class="section">
+        <h1 class="title">
+          Quote Ranks
+        </h1>
+
+        <button [routerLink]="['/']" class="button is-text">
+          Home
+        </button>
+        <p class="subtitle has-text-primary">
+          Provide a quote by {{ author?.name }} <strong></strong>!
+        </p>
+      </section>
+      <section class="section">
+        <div class="columns">
+          <div class="column is-two-fifths">
+            <div class="field box">
+              <form (submit)="addQuote($event, form)" #form="ngForm">
+                <div class="field">
+                  <label class="label">Title</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      required
+                      name="title"
+                      minlength="3"
+                      [(ngModel)]="quote.title"
+                      #title="ngModel"
+                    />
+                    {{ title.errors | json }}
+                    <div *ngIf="title.errors && title.touched">
+                      You must enter a quote title
+                    </div>
+                  </div>
+                </div>
+                <button [routerLink]="['/']" class="button is-text">
+                  Cancel
+                </button>
+
+                <button type="submit" class="button is-text">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

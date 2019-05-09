@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Bulma!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <section class="section">
+        <h1 class="title">
+          Quate Ranks
+        </h1>
+        <button [routerLink]="['/new']" class="button is-text">
+          Add a quotable author
+        </button>
+        <p class="subtitle">We have quotes by: <strong></strong></p>
+      </section>
+      <section>
+        <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th>Author</th>
+              <th>Actions available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let author of authorsData">
+              <th>
+                {{ author.name }}
+              </th>
+              <th>
+                <button
+                  [routerLink]="['/edit', author._id]"
+                  class="button is-text"
+                >
+                  Edit
+                </button>
+                <button
+                  class="button is-text"
+                  type="submit"
+                  [routerLink]="['/quotes', author._id]"
+                >
+                  View Quotes
+                </button>
+                <button
+                  class="button is-text"
+                  type="submit"
+                  (click)="deleteAuthor(author)"
+                >
+                  Delete
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>
