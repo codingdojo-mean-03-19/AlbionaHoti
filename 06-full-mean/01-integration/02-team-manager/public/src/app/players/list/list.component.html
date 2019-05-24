@@ -1,0 +1,41 @@
+<div class="box">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><abbr title="Position">Team Name</abbr></th>
+        <th>Preffered Positions</th>
+        <th><abbr title="Played">Actions</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <th>{{ player.name }}</th>
+        <td>{{ player.position }}</td>
+        <td>
+          <!-- (click)="onDelete(player._id) -->
+          <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <p class="subtitle has-text-info">
+                  Are you sure you want to remove this Player?
+                </p>
+
+                <button class="button is-danger" (click)="onDelete(player._id)">
+                  Yes - Delete
+                </button>
+                <button
+                  class="modal-close is-primary"
+                  (click)="closeModal()"
+                ></button>
+              </div>
+            </div>
+          </div>
+          <button class="button is-danger" (click)="showModal()">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

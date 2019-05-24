@@ -1,0 +1,64 @@
+<style>
+  .title-border {
+    border-right: 3px solid lightslategray;
+    height: 50px;
+    display: inline-block;
+  }
+</style>
+<div class="box">
+  <button class="button is-text subtitle">Game 1</button>
+  <p class="title-border"></p>
+  <button class="button is-text subtitle" (click)="setPlayers()">Game 2</button>
+  <p class="title-border"></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><abbr title="Position">Team Name</abbr></th>
+        <th>Preffered Positions</th>
+        <th><abbr title="Played">Actions</abbr></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <th>{{ player.name }}</th>
+        <td>{{ player.position }}</td>
+
+        <td #playing>
+          <p *ngIf="player.status !== 'Playing'" class="box">Playing</p>
+        </td>
+        <td (click)="changeStatus(player.status, player._id, 'On')">
+          <p
+            *ngIf="player.status === 'NotPlayingOn'"
+            class="box has-background-danger"
+          >
+            Not Playing
+          </p>
+          <p *ngIf="player.status !== 'NotPlayingOn'" class="box ">
+            Not Playing
+          </p>
+        </td>
+        <td (click)="changeStatus(player.status, player._id, 'PlayingOn')">
+          <p
+            *ngIf="player.status === 'PlayingOn'"
+            class="box has-background-primary"
+          >
+            Playing
+          </p>
+          <p *ngIf="player.status !== 'PlayingOn'" class="box ">
+            Playing
+          </p>
+        </td>
+        <td>
+          <!-- <ng-template #undecided> -->
+          <p *ngIf="player.status !== 'Undecided'" class="box">
+            Undecided
+          </p>
+          <!-- </ng-template> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

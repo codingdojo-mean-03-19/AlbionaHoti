@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let quote of authorQuotes">
+            <tr *ngFor="let quote of authorQuotes?.quotes">
               <th>{{ quote.title }}</th>
               <th>{{ quote.vote }}</th>
               <th>

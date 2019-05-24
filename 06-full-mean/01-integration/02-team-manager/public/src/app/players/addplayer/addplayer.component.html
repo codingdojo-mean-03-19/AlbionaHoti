@@ -1,0 +1,43 @@
+<div class="box">
+  <p class="subtitle has-test-primary">Add Player</p>
+  <!-- {{ form.valid | json }} -->
+  <form (submit)="onSubmit($event, form)" #form="ngForm">
+    <div class="field">
+      <label class="label">Player Name</label>
+      <div class="control">
+        <input
+          class="input"
+          name="name"
+          type="text"
+          placeholder="Enter Name"
+          [(ngModel)]="player.name"
+          #name="ngModel"
+          required
+          minlength="2"
+        />
+        <div *ngIf="name.touched && name.errors && name.errors.minlength">
+          <p class="has-text-danger">
+            Name must be at least 2 characters in length.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Preferred Position</label>
+      <div class="control">
+        <input
+          class="input"
+          name="position"
+          type="text"
+          placeholder="Enter Preffered Position"
+          [(ngModel)]="player.position"
+        />
+      </div>
+    </div>
+    <div class="control">
+      <button [disabled]="form.invalid" class="button is-primary">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

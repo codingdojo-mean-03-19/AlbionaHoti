@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Bulma!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <style>
+      .title-border {
+        border-right: 3px solid lightslategray;
+        height: 50px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <button class="button is-text subtitle">Manage Players</button>
+          <p class="title-border"></p>
+          <button
+            class="button is-text subtitle"
+            [routerLink]="['/status/game/1']"
+          >
+            Manage Player Status
+          </button>
+          <div class="box">
+            <button
+              class="button is-text subtitle"
+              [routerLink]="['/players/list']"
+            >
+              List
+            </button>
+            <p class="title-border"></p>
+            <button
+              class="button is-text subtitle"
+              [routerLink]="['/players/addplayer']"
+            >
+              Add Player
+            </button>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

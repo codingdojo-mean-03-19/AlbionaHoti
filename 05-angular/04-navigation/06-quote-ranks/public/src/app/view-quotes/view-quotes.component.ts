@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-quotes',
@@ -15,7 +15,9 @@ export class ViewQuotesComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     private _httpService: HttpService,
     // tslint:disable-next-line:variable-name
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    // tslint:disable-next-line:variable-name
+    private _router: Router
   ) {}
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class ViewQuotesComponent implements OnInit {
     const quoteAuthorObservable = this._httpService.getQuotes(this.authorid);
     quoteAuthorObservable.subscribe(data => {
       console.log('all quotes of this author', data);
-      this.authorQuotes = data.quotes;
+      this.authorQuotes = data;
     });
   }
 
@@ -48,6 +50,7 @@ export class ViewQuotesComponent implements OnInit {
     const deleteQuote = this._httpService.deleteQuote(data);
     deleteQuote.subscribe(data => {
       console.log('##################:-------', data);
+      this._router.navigate([`/quotes/${this.authorid}`]);
     });
   }
 }
