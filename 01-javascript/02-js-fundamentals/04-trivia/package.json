@@ -38,7 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "pm2": "^3.4.0",
     "postcss-loader": "^3.0.0",
     "react": "^16.8.5",
